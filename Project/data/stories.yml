@@ -1,0 +1,89 @@
+version: "3.1"
+
+stories:
+
+ - story: flight booking when provided departure and arrival
+   steps:
+   - intent: greet
+   - action: utter_greet
+   - intent: findFlight
+     entities:
+       - departure: "Boston"
+       - arrival: "Denver"
+   - action: action_find_flight
+  
+ - story: flight booking without providing any information
+   steps:
+   - intent: greet
+   - action: utter_greet
+   - intent: findFlight
+   - action: findFlightForm
+   - active_loop: findFlightForm
+   - active_loop: null
+   - action: action_find_flight
+
+ - story: flight booking without providing departure
+   steps:
+   - intent: greet
+   - action: utter_greet
+   - intent: findFlight
+     entities:
+       - arrival: "Denver"
+   - action: findFlightForm
+   - active_loop: findFlightForm
+   - active_loop: null
+   - action: action_find_flight
+  
+ - story: flight booking without providing arrival
+   steps:
+   - intent: greet
+   - action: utter_greet
+   - intent: findFlight
+     entities:
+       - departure: "Boston"
+   - action: findFlightForm
+   - active_loop: findFlightForm
+   - active_loop: null
+   - action: action_find_flight
+  
+ - story: flight booking but only provided departure time
+   steps:
+   - intent: greet
+   - action: utter_greet
+   - intent: findFlight
+     entities:
+       - departureTime: "after 6 pm"
+   - action: findFlightForm
+   - active_loop: findFlightForm
+   - active_loop: null
+   - action: action_find_flight
+
+ - story: update departure after form is completed
+   steps:
+   - intent: greet
+   - action: utter_greet
+   - intent: findFlight
+   - action: findFlightForm
+   - active_loop: findFlightForm
+   - active_loop: null
+   - action: action_find_flight
+   - intent: updateDeparture
+     entities:
+       - departure: "Boston"
+   - action: action_updateDeparture
+   - action: action_find_flight
+
+ - story: update arrival after form is completed
+   steps:
+   - intent: greet
+   - action: utter_greet
+   - intent: findFlight
+   - action: findFlightForm
+   - active_loop: findFlightForm
+   - active_loop: null
+   - action: action_find_flight
+   - intent: updateArrival
+     entities:
+       - arrival: "Denver"
+   - action: action_updateArrival
+   - action: action_find_flight

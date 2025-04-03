@@ -1,0 +1,114 @@
+version: "3.1"
+
+# Entities
+# - departure
+# - departureTime
+# - departureDate
+# - arrival
+# - arrivalTime
+# - airline
+# - preference
+
+nlu:
+# Return 1-2 instance of a flight on default with no preference
+ - intent: findFlight
+   examples: |
+      - i want to fly from [boston](departure) at [838 am](departureTime) and arrive in [denver](arrival) at [1110 in the morning](arrivalTime)
+      - i need a flight tomorrow from [columbus](departure) to [minneapolis](arrival)
+      - what is the [cheapest](preference) flight from [boston](departure) to [bwi](arrival)
+      - i would like to fly from [columbus](departure) to [pittsburgh](arrival) on [united airlines](airline)
+      - what is the [cheapest](preference) flight available?
+      - please help me find a [cheap](preference) flight
+      - please help me find a [cheap](preference) flight to [pittsburgh](arrival)
+      - help me find [cheap](preference) flight to [newark](arrival)
+      - please help me find a flight
+      - help me find flight to [denver](arrival)
+      - i'd like to book a flight from [dallas](departure) to [denver](arrival)
+      - i also need service from [dallas](departure) to [washington](arrival) arriving by [noon](arrivalTime)
+      - please find a flight on [delta](airline) from [philadelphia](departure) to [san francisco](arrival)
+      - i need a flight from [dallas](departure) to [san francisco](arrival)
+      - i'd like to arrange a flight from [charlotte](departure) to [atlanta](arrival)
+      - [boston](departure) to [denver](arrival)
+      - i need a flight from [charlotte](departure) to [newark](arrival) leaving today [evening](departureTime)
+      - show me the flights from [philadelphia](departure) to [los angeles](arrival) on [thursday](departureDate)
+      - [all](preference) flights from [boston](departure) to [washington](arrival)
+      - what flights are available from [columbus](departure) to [baltimore](arrival) on [thursday](departureDate) [morning](departureTime)
+      - show me the flights from [san diego](departure) to [newark](arrival)
+      - [all](preference) flights to [baltimore](arrival) [after 6 pm](departureTime)
+      - [all](preference) flights from [denver](depature) to [pittsburgh](arrival) leaving [after 7 pm](departureTime)
+      - i need information on flights for [tuesday](departureDate) leaving [san diego](departure) for [dallas](arrival) and arriving by [8 pm](arrivalTime)
+      - please give me the flights from [boston](departure) to [pittsburgh](arrival) on [thursday of next week](departureDate)
+      - show me the flights from [san diego](departure) to [newark](arrival)
+      - please help me find a list of flights to [baltimore](arrival)
+      - please list [all](preference) flights on [united](airline) from [boston](departure) to [baltimore](arrival)
+      - show me [all](preference) flights from [boston](departure) to [pittsburgh](arrival) on [wednesday of next week](departureDate) which leave boston [after 2 o'clock pm](departureTime)
+      - show me [all](preference) flights from [new york](departure) to [milwaukee](arrival) on [northwest airlines](airline) departing at [720 am](departureTime)
+      - flights from [new york](departure) to [miami](arrival)
+      - what are the flights from [st. louis](departure) to [burbank](arrival) [sunday](departureDate) [evening](departureTime)
+      - flights from [boston](departure) to [cleveland](arrival)
+      - what flights go from [boston](departure) to [pittsburgh](arrival) [after 6 o'clock](departureTime) [next tuesday](departureDate)
+      - i'd like to know the [shortest](preference) trip between [boston](departure) and [san francisco](arrival)
+      - what is the [least expensive](preference) flight from [boston](departure) to [atlanta](arrival)
+      - i would like to make a reservation for a flight to [denver](arrival) from [philadelphia](departure) on this coming [sunday](departureDate)
+      - show me flights from [boston](departure) to [denver](arrival) on [wednesday](departureDate)
+      - show me the flights from [boston](departure) to [baltimore](arrival)
+      - list the [delta](airline) airlines flights from [boston](departure) to [philadelphia](arrival)
+      - what [nonstop](preference) flights between [boston](departure) and [washington](arrival) arrive [after 4 o'clock pm](arrivalTime)
+      - please tell me how many [nonstop](preference) flights there are from [boston](departure) to [atlanta](arrival)
+      - what flights from [boston](departure) to [pittsburgh](arrival) arrive [before 8 in the morning](arrivalTime)
+      - find me the [earliest](preference) flight from [boston](departure) to [atlanta](arrival)
+      - list [nonstop](preference) flights from [houston](departure) to [dallas](arrival) which arrive [before midnight](arrivalTime)
+      - show me flights from [new york](departure) to [dallas](arrival)
+      - also show me flights from [philadelphia](departure) to [pittsburgh](arrival) on [tuesday](departureDate)
+      - give me the [cheapest](preference) flight from [charlotte](departure) to [new york](arrival)
+      - show me [all](preference) flights from [boston](departure) to [pittsburgh](arrival)
+      - find me a flight on [united](airline) from [boston](departure) to [san francisco](arrival)
+      - what are [all](preference) the flights from [boston](departure) to [dallas](arrival)
+
+ - intent: greet
+   examples: |
+      - hey
+      - hello
+      - hi
+      - hello there
+      - good morning
+      - good evening
+      - moin
+      - hey there
+      - let's go
+      - hey dude
+      - goodmorning
+      - goodevening
+      - good afternoon
+
+ - intent: updateDeparture
+   examples: |
+      - can you update my departure to [boston](departure)
+      - actually i want to depart from [philadelphia](departure)
+      - please change my departure to [new york](departure)
+      - i want to depart from [houston](departure)
+      - can i see all flights that depart from [houston](departure) instead
+      - change my booking to depart from [san diego](departure)
+      - i want to leave from [columbus](departure) instead
+      - i want to leave from [dallas](departure)
+      - are there any flights where i can leave from [boston](departure) instead
+      - i change my mind, please update the departure to [st. louis](departure)
+      - im going to leave from [dallas](departure) actually
+      - please update my booking to depart from [houston](departure)
+      - update my booking to leave from [boston](departure)
+
+ - intent: updateArrival
+   examples: |
+      - can you update my arrival to [denver](arrival)
+      - actually i want to arrive at [minneapolis](arrival)
+      - please change my arrival to [pittsburgh](arrival)
+      - i want to arrive at [san francisco](arrival)
+      - can i see all flights that arrive at [milwaukee](arrival) instead
+      - change my booking to arrive at [miami](arrival)
+      - i want to arrive at [cleveland](arrival) instead
+      - i want to arrive at [atlanta](arrival)
+      - are there any flights where i can arrive at [denver](arrival) instead
+      - i change my mind, please update the arrival to [dallas](arrival)
+      - i am going to arrive at [denver](arrival) actually
+      - please update my booking to arrive at [washington](arrival)
+      - update my booking to arrive at [denver](arrival)

@@ -1,0 +1,13 @@
+version: "3.1"
+
+rules:
+
+ # https://legacy-docs-oss.rasa.com/docs/rasa/forms/
+ - rule: Submit flight form when completed and call custom action for API using slot information recorded from user
+   condition:
+   # While the form is active
+   - active_loop: findFlightForm
+   steps:
+   - action: findFlightForm
+   - active_loop: null
+   - action: action_find_flight

@@ -1,0 +1,96 @@
+version: "3.1"
+
+intents:
+  - findFlight
+  - greet
+  - updateDeparture
+  - updateArrival
+
+entities:
+ - departure
+ - departureTime
+ - departureDate
+ - arrival
+ - arrivalTime
+ - airline
+ - preference
+
+slots:
+  departure:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: departure
+        conditions:
+          - active_loop: findFlightForm
+
+  departureTime:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: departureTime
+  
+  departureDate:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: departureDate
+
+  arrival:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: arrival
+        conditions:
+          - active_loop: findFlightForm
+          
+  arrivalTime:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: arrivalTime
+  
+  airline:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: airline
+  
+  preference:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: preference
+
+responses:
+  utter_greet:
+  - text: "Hello there! How can I help you book your flight today?"
+
+  utter_ask_departure:
+  - text: "Where would you like to depart from?"
+
+  utter_ask_arrival:
+  - text: "Where would you like to arrive?"
+
+forms:
+  findFlightForm:
+    required_slots:
+      - departure
+      - arrival
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+actions:
+  - action_find_flight
+  - validate_findFlightForm
+  - action_updateDeparture
+  - action_updateArrival
